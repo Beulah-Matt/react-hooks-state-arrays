@@ -3,14 +3,21 @@ import { spicyFoods, getNewRandomSpicyFood } from "../data";
 
 function SpicyFoodList() {
   const [foods, setFoods] = useState(spicyFoods);
-
+//Adding elements
   function handleAddFood() {
     const newFood = getNewRandomSpicyFood();
-    console.log(newFood);
+    const newFoodArray = [...foods, newFood]
+    setFoods(newFoodArray);
+  }
+//Removing Elements
+  function handleLiClick(id){
+    const newFoodFilteredArray = foods.filter((food) => food.id !==id);
+    setFoods(newFoodFilteredArray)
   }
 
+
   const foodList = foods.map((food) => (
-    <li key={food.id}>
+    <li key={food.id} onClick={() => handleLiClick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
